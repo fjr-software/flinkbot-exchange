@@ -1,0 +1,30 @@
+{
+    "name": "fjr-software/flinkbot-exchange",
+    "description": "Flinkbot - exchange component",
+    "version": "1.0.0",
+    "type": "library",
+    "license": "proprietary",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/fjr-software/flinkbot-request"
+        }
+    ],
+    "authors": [
+        {
+            "name": "Francisco Júnior",
+            "email": "franciscojr.dev@gmail.com",
+            "homepage": "https://fjrsoftware.com/",
+            "role": "Developer"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "FjrSoftware\\Flinkbot\\Exchange\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.2",
+        "fjr-software/flinkbot-request": "dev-develop"
+    }
+}
