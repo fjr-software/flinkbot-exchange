@@ -88,4 +88,48 @@ interface ExchangeInterface
      * @return array
      */
     public function closePosition(string $symbol, string $side, float $price, bool $stop = false): array;
+
+    /**
+     * Get close price from candles
+     *
+     * @param array $candles
+     * @return array
+     */
+    public function getClosePrice(array $candles): array;
+
+    /**
+     * Get current value
+     *
+     * @param array $data
+     * @param string|null $key
+     * @return float
+     */
+    public function getCurrentValue(array $data, ?string $key = null): float;
+
+    /**
+     * Calculate percentage
+     *
+     * @param float $value1
+     * @param float $value2
+     * @return float
+     */
+    public function percentage(float $value1, float $value2): float;
+
+    /**
+     * Calculate profit
+     *
+     * @param float $value
+     * @param float $percentage
+     * @return float
+     */
+    public function calculeProfit(float $value, float $percentage): float;
+
+    /**
+     * Check if order is time box
+     *
+     * @param int $orderTime
+     * @param int $timeout
+     * @return bool
+     */
+    public function isTimeBoxOrder(int $orderTime, int $timeout): bool;
 }
