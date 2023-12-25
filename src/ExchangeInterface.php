@@ -83,9 +83,9 @@ interface ExchangeInterface
      *
      * @param string $symbol
      * @param string $side
-     * @param float $quantity
      * @param float $price
+     * @param bool $stop
      * @return array
      */
-    public function closePosition(string $symbol, string $side, float $quantity, float $price): array;
+    public function closePosition(string $symbol, string $side, float $price, bool $stop = false): array;
 }

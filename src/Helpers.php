@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace FjrSoftware\Flinkbot\Exchange;
 
+use DateTime;
+use DateInterval;
+
 trait Helpers
 {
     /**
@@ -21,13 +24,13 @@ trait Helpers
      * Get current value
      *
      * @param array $data
-     * @param string $key
+     * @param string|null $key
      * @return float
      */
-    public function getCurrentValue(array $data, string $key = null): float
+    public function getCurrentValue(array $data, ?string $key = null): float
     {
-        if ($key) {
-            $data = array_column($data, 'close');
+        if ($key !== null) {
+            $data = array_column($data, $key);
         }
 
         return (float) (end($data) ?? 0);
@@ -46,5 +49,38 @@ trait Helpers
         $div = bcdiv($dif, (string) $value1, 5);
 
         return (float) bcmul($div, '100', 2);
+    }
+
+    /**
+     * Calculate profit
+     *
+     * @param float $value
+     * @param float $percentage
+     * @return float
+     */
+    public function calculeProfit(float $value, float $percentage): float
+    {
+        $percentage = bcdiv((string) $percentage, '100', 4);
+        return (float) bcmul((string) $value, (string) $percentage, 2);
+    }
+
+    /**
+     * Check if order is time box
+     *
+     * @param int $orderTime
+     * @param int $timeout
+     * @return bool
+     */
+    public function isTimeBoxOrder(int $orderTime, int $timeout): bool
+    {
+        $timeOrder = new DateTime('@'. (int) ($orderTime / 1e3));
+        $timeOrder->sub(new DateInterval('PT3H'));
+        $timeNow = new DateTime('now');
+        $time = $timeOrder->diff($timeNow);
+
+        $timeBox = (int) ($time->format('%i')) * 60;
+        $timeBox += (int) ($time->format('%s'));
+
+        return $timeBox >= $timeout;
     }
 }
