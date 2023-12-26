@@ -136,7 +136,7 @@ class Binance implements ExchangeInterface
     public function getOrderById(int $orderId, string $symbol): array
     {
         $response = $this->request->get(
-            self::PATH_OLD.'/order ',
+            self::PATH_OLD.'/order',
             [
                 'query' => $this->prepareData([
                     'symbol' => $symbol,
