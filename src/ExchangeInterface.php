@@ -132,4 +132,13 @@ interface ExchangeInterface
      * @return bool
      */
     public function isTimeBoxOrder(int $orderTime, int $timeout): bool;
+
+    /**
+     * Format decimal
+     *
+     * @param float $base
+     * @param float $value
+     * @return float
+     */
+    public function formatDecimal(float $base, float $value): float;
 }

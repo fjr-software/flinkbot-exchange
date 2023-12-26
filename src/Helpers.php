@@ -83,4 +83,20 @@ trait Helpers
 
         return $timeBox >= $timeout;
     }
+
+    /**
+     * Format decimal
+     *
+     * @param float $base
+     * @param float $value
+     * @return float
+     */
+    public function formatDecimal(float $base, float $value): float
+    {
+        preg_match('/\.([0-9]+)/', (string) $base, $temp);
+        $decimal = strlen($temp[1] ?? '');
+        $value = $decimal ? round($value, $decimal) : ceil($value);
+
+        return (float) $value;
+    }
 }
