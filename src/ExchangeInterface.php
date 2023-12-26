@@ -37,6 +37,15 @@ interface ExchangeInterface
     public function cancelOrder(string $symbol, string $orderId): array;
 
     /**
+     * Get order by id
+     *
+     * @param int $orderId
+     * @param string $symbol
+     * @return array
+     */
+    public function getOrderById(int $orderId, string $symbol): array;
+
+    /**
      * Get orders
      *
      * @param string $symbol
