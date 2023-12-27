@@ -113,6 +113,15 @@ interface ExchangeInterface
     public function closePosition(string $symbol, string $side, float $price, bool $stop = false): array;
 
     /**
+     * Get realized pnl
+     *
+     * @param string $symbol
+     * @param int $orderId
+     * @return array
+     */
+    public function getRealizedPnl(string $symbol, int $orderId): array;
+
+    /**
      * Get close price from candles
      *
      * @param array $candles

@@ -278,6 +278,40 @@ class Binance implements ExchangeInterface
     }
 
     /**
+     * @inheritdoc
+     */
+    public function getRealizedPnl(string $symbol, int $orderId): array
+    {
+        $response = $this->request->get(
+            self::PATH_OLD.'/userTrades',
+            [
+                'query' => $this->prepareData([
+                    'symbol' => $symbol,
+                    'orderId' => $orderId
+                ])
+            ]
+        );
+        $userTrades = $this->response($response);
+
+        $close = 0;
+        $commission = 0;
+        $realized = 0;
+
+        foreach ($userTrades as $trade) {
+            $close += $trade['realizedPnl'];
+            $commission += $trade['commission'];
+        }
+
+        $realized = $close - $commission;
+
+        return [
+            'close' => $close,
+            'commission' => $commission,
+            'realized' => $realized
+        ];
+    }
+
+    /**
      * Parse ticker
      *
      * @param array $data
