@@ -5,6 +5,13 @@ namespace FjrSoftware\Flinkbot\Exchange;
 interface ExchangeInterface
 {
     /**
+     * Get rate limit
+     *
+     * @return RateLimit
+     */
+    public function getRateLimit(): RateLimit;
+
+    /**
      * Get exchange information
      *
      * @return array

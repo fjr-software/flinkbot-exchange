@@ -68,6 +68,14 @@ class Binance implements ExchangeInterface
     /**
      * @inheritdoc
      */
+    public function getRateLimit(): RateLimit
+    {
+        return $this->rateLimit;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getExchangeInfo(): array
     {
         $response = $this->request->get(
