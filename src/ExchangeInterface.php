@@ -5,6 +5,13 @@ namespace FjrSoftware\Flinkbot\Exchange;
 interface ExchangeInterface
 {
     /**
+     * Get exchange information
+     *
+     * @return array
+     */
+    public function getExchangeInfo(): array;
+
+    /**
      * Get account information
      *
      * @return array

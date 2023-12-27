@@ -68,6 +68,21 @@ class Binance implements ExchangeInterface
     /**
      * @inheritdoc
      */
+    public function getExchangeInfo(): array
+    {
+        $response = $this->request->get(
+            self::PATH_OLD.'/exchangeInfo',
+            [
+                'query' => $this->prepareData()
+            ]
+        );
+
+        return $this->response($response);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function getAccountInformation(): array
     {
         $response = $this->request->get(
