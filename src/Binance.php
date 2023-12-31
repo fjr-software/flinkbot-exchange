@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FjrSoftware\Flinkbot\Exchange;
 
+use Closure;
 use FjrSoftware\Flinkbot\Request\Proxie;
 use FjrSoftware\Flinkbot\Request\Request;
 use Psr\Http\Message\ResponseInterface;
@@ -43,11 +44,13 @@ class Binance implements ExchangeInterface
      * @param string $publicKey
      * @param string $privateKey
      * @param Proxie|null $proxie
+     * @param Closure|null $rateLimitCallback
      */
     public function __construct(
         private readonly string $publicKey,
         private readonly string $privateKey,
-        private readonly ?Proxie $proxie = null
+        private readonly ?Proxie $proxie = null,
+        private readonly ?Closure $rateLimitCallback = null
     ) {
         $this->request = new Request(
             self::URL_MAIN,
@@ -69,6 +72,10 @@ class Binance implements ExchangeInterface
             $this->rateLimit
                 ->setCurrentOrder($orderCount)
                 ->setCurrentRequest($requestCount);
+
+            if ($this->rateLimitCallback) {
+                ($this->rateLimitCallback)($this->rateLimit, $this->proxie);
+            }
         });
     }
 
