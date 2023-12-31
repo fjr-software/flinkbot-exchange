@@ -61,7 +61,7 @@ class Binance implements ExchangeInterface
         );
         $this->rateLimit = new RateLimit();
 
-        if ($this->proxie) {
+        if ($this->proxie && $this->proxie->getModel()?->type === 'proxy') {
             $this->request->setProxy($this->proxie);
         }
 
