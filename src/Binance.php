@@ -74,7 +74,7 @@ class Binance implements ExchangeInterface
                 ->setCurrentRequest($requestCount);
 
             if ($this->rateLimitCallback) {
-                ($this->rateLimitCallback)($this->rateLimit, $this->proxie);
+                call_user_func($this->rateLimitCallback, $this->rateLimit, $this->proxie);
             }
         });
     }
