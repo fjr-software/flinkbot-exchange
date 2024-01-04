@@ -108,9 +108,10 @@ interface ExchangeInterface
      * @param string $side
      * @param float $price
      * @param bool $stop
+     * @param float|null $qty
      * @return array
      */
-    public function closePosition(string $symbol, string $side, float $price, bool $stop = false): array;
+    public function closePosition(string $symbol, string $side, float $price, bool $stop = false, ?float $qty = null): array;
 
     /**
      * Get realized pnl

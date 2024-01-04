@@ -278,9 +278,9 @@ class Binance implements ExchangeInterface
     /**
      * @inheritdoc
      */
-    public function closePosition(string $symbol, string $side, float $price, bool $stop = false): array
+    public function closePosition(string $symbol, string $side, float $price, bool $stop = false, ?float $qty = null): array
     {
-        return $this->createOrder([
+        $params = [
             'symbol' => $symbol,
             'side' => $side === 'LONG' ? 'SELL' : 'BUY',
             'positionSide' => $side,
@@ -288,7 +288,14 @@ class Binance implements ExchangeInterface
             'closePosition' => 'true',
             'stopPrice' => $price,
             'timeInForce' => 'GTE_GTC'
-        ]);
+        ];
+
+        if ($qty) {
+            $params['quantity'] = $qty;
+            $params['closePosition'] = 'false';
+        }
+
+        return $this->createOrder($params);
     }
 
     /**
