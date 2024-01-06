@@ -2,6 +2,9 @@
 
 namespace FjrSoftware\Flinkbot\Exchange;
 
+use Exception;
+use UnexpectedValueException;
+
 interface ExchangeInterface
 {
     /**
@@ -15,6 +18,8 @@ interface ExchangeInterface
      * Get exchange information
      *
      * @return array
+     * @throws UnexpectedValueException
+     * @throws Exception
      */
     public function getExchangeInfo(): array;
 
@@ -22,6 +27,8 @@ interface ExchangeInterface
      * Get account information
      *
      * @return array
+     * @throws UnexpectedValueException
+     * @throws Exception
      */
     public function getAccountInformation(): array;
 
@@ -30,6 +37,8 @@ interface ExchangeInterface
      *
      * @param string $symbol
      * @return array
+     * @throws UnexpectedValueException
+     * @throws Exception
      */
     public function getStaticsTicker(string $symbol): array;
 
@@ -38,6 +47,8 @@ interface ExchangeInterface
      *
      * @param array $data
      * @return array
+     * @throws UnexpectedValueException
+     * @throws Exception
      */
     public function createOrder(array $data): array;
 
@@ -47,6 +58,8 @@ interface ExchangeInterface
      * @param string $symbol
      * @param string $orderId
      * @return array
+     * @throws UnexpectedValueException
+     * @throws Exception
      */
     public function cancelOrder(string $symbol, string $orderId): array;
 
@@ -56,6 +69,8 @@ interface ExchangeInterface
      * @param int $orderId
      * @param string $symbol
      * @return array
+     * @throws UnexpectedValueException
+     * @throws Exception
      */
     public function getOrderById(int $orderId, string $symbol): array;
 
@@ -64,6 +79,8 @@ interface ExchangeInterface
      *
      * @param string $symbol
      * @return array
+     * @throws UnexpectedValueException
+     * @throws Exception
      */
     public function getOrders(string $symbol): array;
 
@@ -72,6 +89,8 @@ interface ExchangeInterface
      *
      * @param string $symbol
      * @return array
+     * @throws UnexpectedValueException
+     * @throws Exception
      */
     public function getOpenOrders(string $symbol): array;
 
@@ -80,6 +99,8 @@ interface ExchangeInterface
      *
      * @param string $symbol
      * @return array
+     * @throws UnexpectedValueException
+     * @throws Exception
      */
     public function getBook(string $symbol): array;
 
@@ -90,6 +111,8 @@ interface ExchangeInterface
      * @param string $interval
      * @param int $limit
      * @return array
+     * @throws UnexpectedValueException
+     * @throws Exception
      */
     public function getCandles(string $symbol, string $interval, int $limit): array;
 
@@ -98,6 +121,8 @@ interface ExchangeInterface
      *
      * @param string $symbol
      * @return array
+     * @throws UnexpectedValueException
+     * @throws Exception
      */
     public function getPosition(string $symbol): array;
 
@@ -110,6 +135,8 @@ interface ExchangeInterface
      * @param bool $stop
      * @param float|null $qty
      * @return array
+     * @throws UnexpectedValueException
+     * @throws Exception
      */
     public function closePosition(string $symbol, string $side, float $price, bool $stop = false, ?float $qty = null): array;
 
@@ -119,6 +146,8 @@ interface ExchangeInterface
      * @param string $symbol
      * @param int $orderId
      * @return array
+     * @throws UnexpectedValueException
+     * @throws Exception
      */
     public function getRealizedPnl(string $symbol, int $orderId): array;
 

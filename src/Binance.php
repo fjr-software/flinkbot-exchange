@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FjrSoftware\Flinkbot\Exchange;
 
 use Closure;
+use UnexpectedValueException;
 use FjrSoftware\Flinkbot\Request\Proxie;
 use FjrSoftware\Flinkbot\Request\Request;
 use Psr\Http\Message\ResponseInterface;
@@ -374,12 +375,18 @@ class Binance implements ExchangeInterface
      *
      * @param ResponseInterface $response
      * @return array
+     * @throws UnexpectedValueException
      */
     private function response(ResponseInterface $response): array
     {
         $content = $response->getBody()->getContents();
+        $dataResponse = json_decode($content, true) ?? [];
 
-        return json_decode($content, true) ?? [];
+        if (isset($dataResponse['code']) && $dataResponse['code'] < 0) {
+            throw new UnexpectedValueException('API error: '.$dataResponse['msg']);
+        }
+
+        return $dataResponse;
     }
 
     /**
