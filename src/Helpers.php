@@ -78,7 +78,9 @@ trait Helpers
         $timeNow = new DateTime('now');
         $time = $timeOrder->diff($timeNow);
 
-        $timeBox = (int) ($time->format('%i')) * 60;
+        $timeBox = (int) ($time->format('%d')) * 86400;
+        $timeBox += (int) ($time->format('%h')) * 3600;
+        $timeBox += (int) ($time->format('%i')) * 60;
         $timeBox += (int) ($time->format('%s'));
 
         return $timeBox >= $timeout;
