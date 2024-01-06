@@ -74,7 +74,6 @@ trait Helpers
     public function isTimeBoxOrder(int $orderTime, int $timeout): bool
     {
         $timeOrder = new DateTime('@'. (int) ($orderTime / 1e3));
-        $timeOrder->sub(new DateInterval('PT3H'));
         $timeNow = new DateTime('now');
         $time = $timeOrder->diff($timeNow);
 
