@@ -46,19 +46,22 @@ class Binance implements ExchangeInterface
      * @param string $privateKey
      * @param Proxie|null $proxie
      * @param Closure|null $rateLimitCallback
+     * @param int $timeout
      */
     public function __construct(
         private readonly string $publicKey,
         private readonly string $privateKey,
         private readonly ?Proxie $proxie = null,
-        private readonly ?Closure $rateLimitCallback = null
+        private readonly ?Closure $rateLimitCallback = null,
+        private readonly int $timeout = 5
     ) {
         $this->request = new Request(
             self::URL_MAIN,
             [
                 'Content-Type' => 'application/json',
                 'X-MBX-APIKEY' => $this->publicKey
-            ]
+            ],
+            $this->timeout
         );
         $this->rateLimit = new RateLimit();
 
