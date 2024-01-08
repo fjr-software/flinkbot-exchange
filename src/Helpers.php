@@ -5,10 +5,31 @@ declare(strict_types=1);
 namespace FjrSoftware\Flinkbot\Exchange;
 
 use DateTime;
-use DateInterval;
 
 trait Helpers
 {
+    /**
+     * Get high price from candles
+     *
+     * @param array $candles
+     * @return array
+     */
+    public function getHighPrice(array $candles): array
+    {
+        return array_map(fn($candle) => $candle['high'], $candles);
+    }
+
+    /**
+     * Get low price from candles
+     *
+     * @param array $candles
+     * @return array
+     */
+    public function getLowPrice(array $candles): array
+    {
+        return array_map(fn($candle) => $candle['low'], $candles);
+    }
+
     /**
      * Get close price from candles
      *

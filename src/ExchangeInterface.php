@@ -152,6 +152,22 @@ interface ExchangeInterface
     public function getRealizedPnl(string $symbol, int $orderId): array;
 
     /**
+     * Get high price from candles
+     *
+     * @param array $candles
+     * @return array
+     */
+    public function getHighPrice(array $candles): array;
+
+    /**
+     * Get low price from candles
+     *
+     * @param array $candles
+     * @return array
+     */
+    public function getLowPrice(array $candles): array;
+
+    /**
      * Get close price from candles
      *
      * @param array $candles
