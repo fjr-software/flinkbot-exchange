@@ -66,6 +66,10 @@ trait Helpers
      */
     public function percentage(float $value1, float $value2): float
     {
+        if (!$value1 || !$value2) {
+            return 0;
+        }
+
         $dif = bcsub((string) $value1, (string) $value2, 5);
         $div = bcdiv($dif, (string) $value1, 5);
 
