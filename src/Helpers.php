@@ -125,4 +125,24 @@ trait Helpers
 
         return (float) $value;
     }
+
+    /**
+     * Get time position
+     *
+     * @param string $open
+     * @return int
+     */
+    public function timePosition(string $open): int
+    {
+        $open = new DateTime($open);
+        $now = new DateTime('now');
+        $time = $open->diff($now);
+
+        $diff = (int) ($time->format('%d')) * 86400;
+        $diff += (int) ($time->format('%h')) * 3600;
+        $diff += (int) ($time->format('%i')) * 60;
+        $diff += (int) ($time->format('%s'));
+
+        return $diff;
+    }
 }

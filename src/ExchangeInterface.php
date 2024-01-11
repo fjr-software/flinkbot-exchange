@@ -219,4 +219,12 @@ interface ExchangeInterface
      * @return float
      */
     public function formatDecimal(float $base, float $value): float;
+
+    /**
+     * Get time position
+     *
+     * @param string $open
+     * @return int
+     */
+    public function timePosition(string $open): int;
 }
